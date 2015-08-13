@@ -49,26 +49,6 @@
 			<key>Showcase</key>
 			<string>Showcase</string>
 		</dict>
-		<key>QSPreferencePanesTemplate</key>
-		<dict>
-			<key>ShowcasePrefPane</key>
-			<dict>
-				<key>class</key>
-				<string>QSPreferencePane</string>
-				<key>description</key>
-				<string>Showcase interface preferences</string>
-				<key>icon</key>
-				<string></string>
-				<key>name</key>
-				<string>Showcase</string>
-				<key>nibBundle</key>
-				<string>com.blacktree.Quicksilver.Showcase</string>
-				<key>nibName</key>
-				<string>ShowcasePrefPane</string>
-				<key>type</key>
-				<string>hidden</string>
-			</dict>
-		</dict>
 	</dict>
 	<key>QSRequirements</key>
 	<dict>

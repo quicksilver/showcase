@@ -107,7 +107,7 @@
 	[CATransaction commit];
 }
 
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)cgContext;
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)cgContext
 {    
     if ( [layer.name isEqualToString:@"repLayer"] )
 	{

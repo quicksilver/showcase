@@ -120,10 +120,8 @@
 		NSRect topRect, bottomRect;
 		NSDivideRect(drawingRect, &topRect, &bottomRect, NSHeight(drawingRect) /2, NSMaxYEdge);
 
-		if ([image isFlipped]) [image setFlipped:false];
 		[image drawInRect:topRect fromRect:rectFromSize([image size]) operation:NSCompositeSourceOver fraction:1.0];		
 		
-		[image setFlipped:true];
 		[image drawInRect:bottomRect fromRect:rectFromSize([image size]) operation:NSCompositeSourceOver fraction:1.0];		
 
 		NSColor* color1 = [NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:1.0];//.87];

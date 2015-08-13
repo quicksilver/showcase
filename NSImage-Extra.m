@@ -191,7 +191,6 @@
     // create a new image to draw into        
     newImage = [[NSImage alloc] initWithSize:targetSize];
     [newImage setCacheMode:NSImageCacheNever];
-    [newImage setFlipped:isFlipped];
 
     // once focus is locked, all drawing goes into this NSImage instance
     // directly, not to the screen. It also receives its own graphics

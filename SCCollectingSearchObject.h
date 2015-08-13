@@ -6,8 +6,7 @@
 //  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "QSCollectingSearchObjectView.h"
+#import <QSInterface/QSCollectingSearchObjectView.h>
 #import "QSMySearchObject.h"
 
 @interface SCCollectingSearchObject : QSCollectingSearchObjectView {

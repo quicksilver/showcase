@@ -8,7 +8,6 @@
 //  QS Interface template by Vacuous Virtuoso
 //
 
-#import <Cocoa/Cocoa.h>
 #import <QSInterface/QSResizingInterfaceController.h>
 #import "QSMySearchObject.h"
 #import "SCCollectingSearchObject.h"

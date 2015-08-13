@@ -11,7 +11,7 @@
 CGImageRef CreateCGImageFromData(NSData* data);
 
 @interface NSImage (Extra)
-	- (CGImageRef) cgImage;
+
 - (NSSize)proportionalSizeForTargetSize:(NSSize)aSize;
 
 - (NSImage*)imageByScalingProportionallyToSize:(NSSize)aSize;

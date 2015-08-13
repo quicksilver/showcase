@@ -32,12 +32,16 @@
 
 - (void)transmogrifyWithText:(NSString *)string {
 	if ([[self window] firstResponder] != self) return;
-	[super transmogrifyWithText:string];
-	
+//	[super transmogrifyWithText:string];
+
+	NSText* editor = self.currentEditor;
 	NSView* edView = [editor enclosingScrollView];
 	[[[self window] contentView] addSubview:edView];
 	[edView setFrame:NSInsetRect([parentSelector frame], 30, 35)];
-	[editor setContinuousSpellCheckingEnabled:NO];
+	if ([editor isKindOfClass:[NSTextView class]])
+	{
+		[(NSTextView*)editor setContinuousSpellCheckingEnabled:NO];
+	}
 	//[self someEffect:true];
 	[parentSelector setHidden:true];
 	[parentSelector activatedEditor:self];
@@ -51,7 +55,7 @@
 
 
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent {
-	if (([theEvent keyCode] == 53) && ([[self window] firstResponder] == editor)) {
+	if (([theEvent keyCode] == 53) && ([[self window] firstResponder] == self.currentEditor)) {
 		[parentSelector deactivatedEditor];
 		return true;
 	}

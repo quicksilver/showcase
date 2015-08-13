@@ -11,14 +11,6 @@
 
 @implementation NSImage (Extra)
 
-- (CGImageRef) cgImage
-{
-	// I'm open to better ideas. :)
-	
-	NSData* data = [self TIFFRepresentation];
-	return CreateCGImageFromData(data);
-}
-
 - (NSSize)proportionalSizeForTargetSize:(NSSize)targetSize
 {
     NSSize imageSize = [self size];

@@ -26,6 +26,6 @@
 	
 	NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:color1 endingColor:color2];
 	[gradient drawInRect:rect angle:90];
-}/**/
+}*/
 
 @end

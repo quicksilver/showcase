@@ -31,12 +31,13 @@
 	[mainLayer setNeedsDisplay];
 	
 	textLayer = [CATextLayer layer];
+	textLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 	textLayer.name = @"textLayer";
 	textLayer.font                  = [NSFont boldSystemFontOfSize:28.0];
 	textLayer.fontSize              = 28;
 	textLayer.shadowOffset          = CGSizeMake ( 0, 0 );
 	textLayer.shadowOpacity         = 0.6;
-	textLayer.shadowColor			= CGColorCreateGenericRGB(255, 255, 255, 255);
+	textLayer.shadowColor			= [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1].CGColor;
 	textLayer.shadowRadius			= 4;
 	textLayer.bounds = CGRectMake( 0, 0, 600, 60 );
 	textLayer.alignmentMode         = kCAAlignmentLeft;

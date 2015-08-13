@@ -18,17 +18,19 @@
 		
 		mainLayer = [CALayer layer];
 		mainLayer.name = @"repLayer";
+		mainLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 		mainLayer.anchorPoint = CGPointMake(0.5,0);
 		mainLayer.delegate = self;
 		[pLayer addSublayer:mainLayer];
 
 		textLayer = [CATextLayer layer];
+		textLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 		textLayer.name = @"textLayer";
 		textLayer.font                  = [NSFont boldSystemFontOfSize:20.0];
 		textLayer.fontSize              = 20;
 		textLayer.shadowOffset          = CGSizeMake ( 0, 0 );
 		textLayer.shadowOpacity         = 0.6;
-		textLayer.shadowColor			= CGColorCreateGenericRGB(255, 255, 255, 255);
+		textLayer.shadowColor			= [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1].CGColor;
 		textLayer.shadowRadius			= 4;
 		textLayer.bounds = CGRectMake( 0, 0, 400, 30 );
 		textLayer.alignmentMode         = kCAAlignmentRight;
@@ -37,11 +39,12 @@
 
 		detailLayer = [CATextLayer layer];
 		detailLayer.name = @"textLayer";
+		detailLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 		detailLayer.font                  = [NSFont boldSystemFontOfSize:10.0];
 		detailLayer.fontSize              = 10;
 		detailLayer.shadowOffset          = CGSizeMake ( 0, 0 );
 		detailLayer.shadowOpacity         = 0.6;
-		detailLayer.shadowColor			= CGColorCreateGenericRGB(255, 255, 255, 255);
+		detailLayer.shadowColor			= [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1].CGColor;
 		detailLayer.shadowRadius			= 2;
 		detailLayer.bounds = CGRectMake( 0, 0, 400, 30 );
 		detailLayer.alignmentMode         = kCAAlignmentRight;
@@ -129,6 +132,7 @@
 		
 		//[[NSGraphicsContext currentContext] setCompositingOperation:NSCompositeSourceOver];
 		[gradient drawInRect:bottomRect angle:90];
+		[gradient release];
 		
     	[NSGraphicsContext restoreGraphicsState];        
 

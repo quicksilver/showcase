@@ -45,7 +45,7 @@
 	[window setWindowProperty:[NSDictionary dictionaryWithObjectsAndKeys:@"QSExplodeEffect",@"transformFn",@"hide",@"type",[NSNumber numberWithFloat:0.2],@"duration",nil] forKey:kQSWindowExecEffect];
 
     NSArray *theControls=[NSArray arrayWithObjects:dSelector,aSelector,iSelector,nil];
-    foreach(theControl,theControls){
+    for(id theControl in theControls){
 
 		[theControl setPreferredEdge:NSMinYEdge];
 		[theControl setResultsPadding:NSMinY([dSelector frame])];

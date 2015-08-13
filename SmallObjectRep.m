@@ -19,10 +19,12 @@
 
 		imgLayer = [CALayer layer];
 		imgLayer.name = @"imgLayer";
+		imgLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 		[mainLayer addSublayer:imgLayer];
 
 		mirrorLayer = [CALayer layer];
 		mirrorLayer.name = @"mirrorLayer";
+		mirrorLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 
 		[mainLayer addSublayer:mirrorLayer];
 
@@ -34,12 +36,13 @@
 		[mainLayer addSublayer:gradientLayer];
 		
 		textLayer = [CATextLayer layer];
+		textLayer.contentsScale = [NSScreen mainScreen].backingScaleFactor;
 		textLayer.name = @"textLayer";
 		textLayer.font                  = [NSFont boldSystemFontOfSize:14.0];
 		textLayer.fontSize              = 14;
 		textLayer.shadowOffset          = CGSizeMake ( 0, 0 );
 		textLayer.shadowOpacity         = 0.6;
-		textLayer.shadowColor			= CGColorCreateGenericRGB(255, 255, 255, 255);
+		textLayer.shadowColor			= [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1].CGColor;
 		textLayer.shadowRadius			= 4;
 		textLayer.bounds = CGRectMake( 0, 0, 400, 30 );
 		textLayer.alignmentMode         = kCAAlignmentLeft;
@@ -51,21 +54,18 @@
 
 -(void) show: (QSBasicObject*)obj useSize:(NSSize)size at:(NSPoint)pos {
 	NSImage* img = [obj icon];
-	[img setSize: NSMakeSize(32, 32)];
-	CGImageRef cgImg = [img cgImage];
+	[img setSize: NSMakeSize(32,32)];
 
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue
                  forKey:kCATransactionDisableActions];
-		imgLayer.contents = (id)cgImg;
+		imgLayer.contents = img;
 		imgLayer.bounds = CGRectMake(0, 0, img.size.width, img.size.height);
 
-		mirrorLayer.contents = (id)cgImg;
+		mirrorLayer.contents = img;
 		mirrorLayer.bounds = CGRectMake(0, 0, img.size.width, img.size.height);
 		mirrorLayer.position = CGPointMake(0, -(img.size.height));
 		mirrorLayer.transform = CATransform3DMakeRotation(pi, 1, 0, 0);
-
-		CGImageRelease(cgImg);
 
 		gradientLayer.bounds = CGRectMake(0, 0, img.size.width, img.size.height);
 		gradientLayer.position = mirrorLayer.position;
@@ -98,29 +98,31 @@
     if ( [layer.name isEqualToString:@"gradientLayer"] )
 	{
 		[NSGraphicsContext saveGraphicsState];
-
-            NSRect drawingRect = NSRectFromCGRect( CGContextGetClipBoundingBox( cgContext ) );
+		{
+			NSRect drawingRect = NSRectFromCGRect( CGContextGetClipBoundingBox( cgContext ) );
 			NSRect blackRect = NSMakeRect(drawingRect.origin.x, drawingRect.origin.y, drawingRect.size.width,
-								abs(drawingRect.size.height*0.4));
+										  abs(drawingRect.size.height*0.4));
 			NSRect gradientRect = NSMakeRect(blackRect.origin.x, blackRect.origin.y + blackRect.size.height,
-								blackRect.size.width, drawingRect.size.height - blackRect.size.height);
-			
-            NSGraphicsContext* context = [NSGraphicsContext graphicsContextWithGraphicsPort:cgContext flipped:NO];
-		    [NSGraphicsContext setCurrentContext:context];
+											 blackRect.size.width, drawingRect.size.height - blackRect.size.height);
+
+			NSGraphicsContext* context = [NSGraphicsContext graphicsContextWithGraphicsPort:cgContext flipped:NO];
+			[NSGraphicsContext setCurrentContext:context];
 
 			NSColor* colorM = [NSColor blackColor];
-            NSColor* color1 = [colorM colorWithAlphaComponent:1.0];
-            NSColor* color2 = [colorM colorWithAlphaComponent:0.4];
-			
-            NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:color1 endingColor:color2];
+			NSColor* color1 = [colorM colorWithAlphaComponent:1.0];
+			NSColor* color2 = [colorM colorWithAlphaComponent:0.4];
 
-            CGFloat angle   = 90;
-            [gradient drawInRect:gradientRect angle:angle];
-            	                          
+			NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:color1 endingColor:color2];
+
+			CGFloat angle   = 90;
+			[gradient drawInRect:gradientRect angle:angle];
+
+			[gradient release];
 			NSBezierPath* bRect = [NSBezierPath bezierPath];
 			[bRect appendBezierPathWithRect:blackRect];
 			[bRect fill];
-    	[NSGraphicsContext restoreGraphicsState];        
+		}
+		[NSGraphicsContext restoreGraphicsState];
 		
 	} else {
         [super drawLayer:layer inContext:cgContext];
